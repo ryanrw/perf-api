@@ -1,0 +1,12 @@
+{
+  "name": "perf-api",
+  "version": "1.0.0",
+  "description": "Experimential of how perf API works",
+  "main": "index.js",
+  "repository": "https://github.com/Ryan-Willpower/perf-api.git",
+  "author": "Ryan Willpower <surasak.c.work@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  }
+}
