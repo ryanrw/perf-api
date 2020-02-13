@@ -1,6 +1,6 @@
-const gql = require("graphql-tag")
+import gql from "graphql-tag"
 
-exports.createQuery = function createQuery() {
+export function createQuery() {
   const QUERY = gql`
     mutation createUser(
       $username: String!
@@ -16,7 +16,7 @@ exports.createQuery = function createQuery() {
   return QUERY
 }
 
-exports.createVariable = function createVariable(id) {
+export function createVariable(id: number) {
   const VARIABLE = {
     username: `test${id}`,
     email: `test${id}@gmail.com`,
