@@ -1,5 +1,5 @@
 import { performance } from "perf_hooks"
-import { observer, data } from "./utils/getObserver"
+import { observer, data } from "./utils/observer"
 import { fetchData } from "./utils/fetch"
 
 observer.observe({ entryTypes: ["measure"] })
