@@ -8,12 +8,15 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.js",
-    "start:monolith": "nodemon src/monolith.js"
+    "start:monolith": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/monolith.ts"
   },
   "dependencies": {
+    "@types/node": "^13.7.1",
     "axios": "^0.19.2",
     "graphql": "^14.6.0",
-    "graphql-tag": "^2.10.3"
+    "graphql-tag": "^2.10.3",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0"
