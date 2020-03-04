@@ -1,58 +1,46 @@
 import { print } from "graphql"
 import axios from "axios"
-
 import { TestCase } from "data"
+import {
+  FetchOption,
+  FetchOptionWithHeader,
+  RequestHeader,
+  RequestOption,
+} from "fetch"
 
-interface FetchOption {
-  url: string
-  id: number
-}
-
-interface FetchOptionWithHeader extends FetchOption {
-  header: string
-}
-
-export async function fetchData(data: TestCase, target: FetchOption) {
-  const QUERY = data.query
-  const variables = data.variables && data.variables(target.id)
-  try {
-    const { data } = await axios.post(target.url, {
-      query: print(QUERY),
-      variables,
-    })
-
-    console.log(`Target id ${target.id} successfully`)
-
-    return data
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-export async function fetchDataWithHeader(
+export async function fetchData(
   data: TestCase,
-  target: FetchOptionWithHeader
+  target: FetchOption | FetchOptionWithHeader
 ) {
-  const QUERY = data.query
+  const { query } = data
   const variables = data.variables && data.variables(target.id)
-  try {
-    const { data } = await axios.post(
-      target.url,
-      {
-        query: print(QUERY),
-        variables,
-      },
-      {
-        headers: {
-          Authorization: target.header,
-        },
-      }
-    )
 
-    console.log(`Target id ${target.id} successfully`)
+  const hasHeader = (target as FetchOptionWithHeader).header
+
+  const options = { query: print(query), variables }
+  const header = hasHeader && {
+    headers: {
+      Authorization: (target as FetchOptionWithHeader).header,
+    },
+  }
+
+  try {
+    const data = hasHeader
+      ? await sendQuery(target.url, options, header)
+      : await sendQuery(target.url, options)
 
     return data
   } catch (error) {
     console.error(error)
   }
+}
+
+async function sendQuery(
+  target: string,
+  option: RequestOption,
+  header?: RequestHeader
+) {
+  const { data } = await axios.post(target, option, header)
+
+  return data
 }

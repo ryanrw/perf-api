@@ -1,2 +1,14 @@
 node_modules/
+
+# Secret Key
 src/serviceAccountKey.json
+
+# Test result files
+micro-createpost.json
+micro-createuser.json
+micro-getallpost.json
+micro-loginuser.json
+mononc-createpost.json
+mononc-createuser.json
+mononc-getallpost.json
+mononc-loginuser.json

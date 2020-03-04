@@ -10,14 +10,12 @@ async function runSingleTest(id: number) {
 
   performance.mark("start login query")
 
-  const data = await fetchData(getAllPostCase, {
+  await fetchData(getAllPostCase, {
     url: "http://localhost:4200",
     id,
   })
 
   performance.mark("finish")
-
-  console.log(data)
 
   performance.measure(
     `start login query to finish`,

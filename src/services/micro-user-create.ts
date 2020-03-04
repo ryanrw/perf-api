@@ -10,7 +10,7 @@ async function runSingleTest(id: number) {
 
   performance.mark(id.toString())
 
-  const data = await fetchData(createUserCase, {
+  await fetchData(createUserCase, {
     url: "http://localhost:4000",
     id,
   })
@@ -18,8 +18,6 @@ async function runSingleTest(id: number) {
   performance.mark("finish")
 
   performance.measure(`${id} to finish`, id.toString(), `finish`)
-
-  console.log(data)
 }
 
 runSingleTest(0)
